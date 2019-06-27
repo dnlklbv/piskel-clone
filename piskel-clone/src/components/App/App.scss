@@ -1,0 +1,21 @@
+@import "normalize";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  height: 92vh;
+  padding: 4vh;
+  overflow: hidden;
+
+  background-color: #333333;
+
+  &__sidebar {
+    display: flex;
+    justify-content: space-between;
+    width: 20vw;
+  }
+
+  &__main-section {
+    width: 50vw;
+  }
+}

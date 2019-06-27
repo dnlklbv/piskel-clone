@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import PenTool from '../../tools/PenTool';
+import MirrorPenTool from '../../tools/MirrorPenTool';
 
 class Canvas extends Component {
   constructor(props) {
@@ -40,6 +41,9 @@ class Canvas extends Component {
     switch (currentTool) {
       case 'pen':
         this.toolObject = new PenTool(ctx, primaryColor);
+        break;
+      case 'mirror-pen':
+        this.toolObject = new MirrorPenTool(ctx, primaryColor);
         break;
       default:
     }

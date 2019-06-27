@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import PenTool from '../../tools/PenTool';
+
 class Canvas extends Component {
   constructor(props) {
     super(props);
@@ -29,28 +31,45 @@ class Canvas extends Component {
   startDraw({ nativeEvent }) {
     this.isPainting = true;
 
-    const { primaryColor } = this.props;
-    const { ctx } = this;
+    const { primaryColor, currentTool } = this.props;
     const { offsetX, offsetY } = nativeEvent;
+    const { ctx } = this;
     const coords = this.getRelativeCoords(offsetX, offsetY);
-    ctx.fillStyle = primaryColor;
-    ctx.fillRect(coords.x, coords.y, 1, 1);
+    const { x, y } = coords;
+
+    switch (currentTool) {
+      case 'pen':
+        this.toolObject = new PenTool(ctx, primaryColor);
+        break;
+      default:
+    }
+
+    this.toolObject.startDraw(x, y);
   }
 
   continueDraw({ nativeEvent }) {
     if (!this.isPainting) return;
 
-    const { primaryColor } = this.props;
-    const { ctx } = this;
     const { offsetX, offsetY } = nativeEvent;
     const coords = this.getRelativeCoords(offsetX, offsetY);
-    ctx.fillStyle = primaryColor;
-    ctx.fillRect(coords.x, coords.y, 1, 1);
+    const { x, y } = coords;
+
+    try {
+      this.toolObject.continueDraw(x, y);
+    } catch (error) {
+      if (error.name !== 'TypeError') throw error;
+    }
   }
 
   stopDraw() {
     if (!this.isPainting) return;
     this.isPainting = false;
+
+    try {
+      this.toolObject.stopDraw();
+    } catch (error) {
+      if (error.name !== 'TypeError') throw error;
+    }
   }
 
   render() {
@@ -77,6 +96,7 @@ class Canvas extends Component {
 Canvas.propTypes = {
   canvasSize: PropTypes.number.isRequired,
 
+  currentTool: PropTypes.string.isRequired,
   primaryColor: PropTypes.string.isRequired,
 };
 

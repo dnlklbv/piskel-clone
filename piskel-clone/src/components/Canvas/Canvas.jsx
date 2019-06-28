@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import PenTool from '../../tools/PenTool';
 import MirrorPenTool from '../../tools/MirrorPenTool';
 import FillTool from '../../tools/FillTool';
+import EraserTool from '../../tools/EraserTool';
 
 class Canvas extends Component {
   constructor(props) {
@@ -48,6 +49,9 @@ class Canvas extends Component {
         break;
       case 'fill':
         this.toolObject = new FillTool(ctx, primaryColor);
+        break;
+      case 'eraser':
+        this.toolObject = new EraserTool(ctx);
         break;
       default:
     }

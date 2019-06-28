@@ -5,6 +5,7 @@ import PenTool from '../../tools/PenTool';
 import MirrorPenTool from '../../tools/MirrorPenTool';
 import FillTool from '../../tools/FillTool';
 import EraserTool from '../../tools/EraserTool';
+import DitheringTool from '../../tools/DitheringTool';
 
 class Canvas extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class Canvas extends Component {
   startDraw({ nativeEvent }) {
     this.isPainting = true;
 
-    const { primaryColor, currentTool } = this.props;
+    const { primaryColor, secondaryColor, currentTool } = this.props;
     const { offsetX, offsetY } = nativeEvent;
     const { ctx } = this;
     const coords = this.getRelativeCoords(offsetX, offsetY);
@@ -52,6 +53,9 @@ class Canvas extends Component {
         break;
       case 'eraser':
         this.toolObject = new EraserTool(ctx);
+        break;
+      case 'dithering':
+        this.toolObject = new DitheringTool(ctx, primaryColor, secondaryColor);
         break;
       default:
     }
@@ -110,6 +114,7 @@ Canvas.propTypes = {
 
   currentTool: PropTypes.string.isRequired,
   primaryColor: PropTypes.string.isRequired,
+  secondaryColor: PropTypes.string.isRequired,
 };
 
 export default Canvas;

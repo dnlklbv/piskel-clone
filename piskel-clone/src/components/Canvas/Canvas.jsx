@@ -6,6 +6,7 @@ import MirrorPenTool from '../../tools/MirrorPenTool';
 import FillTool from '../../tools/FillTool';
 import EraserTool from '../../tools/EraserTool';
 import DitheringTool from '../../tools/DitheringTool';
+import FillSameTool from '../../tools/FillSameTool';
 
 class Canvas extends Component {
   constructor(props) {
@@ -56,6 +57,9 @@ class Canvas extends Component {
         break;
       case 'dithering':
         this.toolObject = new DitheringTool(ctx, primaryColor, secondaryColor);
+        break;
+      case 'fill-same':
+        this.toolObject = new FillSameTool(ctx, primaryColor);
         break;
       default:
     }

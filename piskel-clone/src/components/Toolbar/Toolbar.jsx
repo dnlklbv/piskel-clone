@@ -26,7 +26,7 @@ const Toolbar = (props) => {
     swapColors();
   };
 
-  const toolList = ['pen', 'mirror-pen', 'fill', 'eraser', 'dithering'];
+  const toolList = ['pen', 'mirror-pen', 'fill', 'fill-same', 'eraser', 'dithering'];
 
   const toolButtons = toolList.map((tool) => {
     let buttonClass = 'tool-button';

@@ -1,4 +1,6 @@
 .canvas-wrapper {
+  position: relative;
+
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -11,9 +13,10 @@
   height: 128 * 4px;
 
   background-image: url(img/bg-transparent.png);
-  image-rendering: pixelated;
   background-repeat: repeat;
   cursor: crosshair;
+
+  image-rendering: pixelated;
 
   @media only screen and (min-width: 1300px) {
     width: 128 * 5px;
@@ -29,4 +32,10 @@
     width: 128 * 7px;
     height: 128 * 7px;
   }
+}
+
+.cursor-coords {
+  position: absolute;
+  bottom: -1vh;
+  transform: translateY(100%);
 }

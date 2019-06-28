@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import CursorCoords from '../CursorCoords';
+
 import PenTool from '../../tools/PenTool';
 import MirrorPenTool from '../../tools/MirrorPenTool';
 import FillTool from '../../tools/FillTool';
@@ -13,6 +15,11 @@ class Canvas extends Component {
     super(props);
 
     this.isPainting = false;
+
+    this.state = {
+      currentX: null,
+      currentY: null,
+    };
 
     this.startDraw = this.startDraw.bind(this);
     this.continueDraw = this.continueDraw.bind(this);
@@ -68,11 +75,16 @@ class Canvas extends Component {
   }
 
   continueDraw({ nativeEvent }) {
-    if (!this.isPainting) return;
-
     const { offsetX, offsetY } = nativeEvent;
     const coords = this.getRelativeCoords(offsetX, offsetY);
     const { x, y } = coords;
+
+    this.setState({
+      currentX: x,
+      currentY: y,
+    });
+
+    if (!this.isPainting) return;
 
     try {
       this.toolObject.continueDraw(x, y);
@@ -81,7 +93,14 @@ class Canvas extends Component {
     }
   }
 
-  stopDraw() {
+  stopDraw(event) {
+    if (event.type !== 'mouseup') {
+      this.setState({
+        currentX: null,
+        currentY: null,
+      });
+    }
+
     if (!this.isPainting) return;
     this.isPainting = false;
 
@@ -94,6 +113,7 @@ class Canvas extends Component {
 
   render() {
     const { canvasSize } = this.props;
+    const { currentX, currentY } = this.state;
 
     return (
       <div className="canvas-wrapper">
@@ -108,6 +128,7 @@ class Canvas extends Component {
           onMouseOut={this.stopDraw}
           onBlur={this.stopDraw}
         />
+        <CursorCoords x={currentX} y={currentY} />
       </div>
     );
   }

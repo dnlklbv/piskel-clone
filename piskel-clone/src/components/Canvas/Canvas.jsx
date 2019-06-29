@@ -11,6 +11,7 @@ import DitheringTool from '../../tools/DitheringTool';
 import FillSameTool from '../../tools/FillSameTool';
 import LightenTool from '../../tools/LightShadeTool';
 import DarkShadeTool from '../../tools/DarkShadeTool';
+import RectangleTool from '../../tools/RectangleTool';
 
 class Canvas extends Component {
   constructor(props) {
@@ -75,6 +76,9 @@ class Canvas extends Component {
         break;
       case 'darken':
         this.toolObject = new DarkShadeTool(ctx, primaryColor);
+        break;
+      case 'rectangle':
+        this.toolObject = new RectangleTool(ctx, primaryColor);
         break;
       default:
     }

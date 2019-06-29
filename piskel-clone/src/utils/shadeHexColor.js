@@ -8,7 +8,13 @@ export default function shadeHexColor(color, ratio) {
 
   rgb.forEach((val, i) => {
     const cc = parseInt(val, 16) + amount;
-    let c = (cc > 255) ? 255 : (cc);
+    let c;
+    if (amount >= 0) {
+      c = (cc > 255) ? 255 : (cc);
+    } else {
+      c = (cc < 0) ? 0 : (cc);
+    }
+
     c = (c.toString(16).length > 1) ? c.toString(16) : `0${c.toString(16)}`;
     rgb[i] = c;
   });

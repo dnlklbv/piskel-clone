@@ -9,5 +9,6 @@ import './img/icon-dithering.png';
 import './img/icon-fill-same.png';
 import './img/icon-lighten.png';
 import './img/icon-darken.png';
+import './img/icon-rectangle.png';
 
 export default ToolbarContainer;

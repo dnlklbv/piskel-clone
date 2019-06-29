@@ -9,6 +9,7 @@ import FillTool from '../../tools/FillTool';
 import EraserTool from '../../tools/EraserTool';
 import DitheringTool from '../../tools/DitheringTool';
 import FillSameTool from '../../tools/FillSameTool';
+import LightenTool from '../../tools/LightShadeTool';
 
 class Canvas extends Component {
   constructor(props) {
@@ -67,6 +68,9 @@ class Canvas extends Component {
         break;
       case 'fill-same':
         this.toolObject = new FillSameTool(ctx, primaryColor);
+        break;
+      case 'lighten':
+        this.toolObject = new LightenTool(ctx, primaryColor);
         break;
       default:
     }

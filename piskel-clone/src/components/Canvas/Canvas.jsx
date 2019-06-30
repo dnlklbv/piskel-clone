@@ -13,6 +13,7 @@ import LightenTool from '../../tools/LightShadeTool';
 import DarkShadeTool from '../../tools/DarkShadeTool';
 import RectangleTool from '../../tools/RectangleTool';
 import LineTool from '../../tools/LineTool';
+import CircleTool from '../../tools/CircleTool';
 
 class Canvas extends Component {
   constructor(props) {
@@ -83,6 +84,9 @@ class Canvas extends Component {
         break;
       case 'line':
         this.toolObject = new LineTool(ctx, primaryColor);
+        break;
+      case 'circle':
+        this.toolObject = new CircleTool(ctx, primaryColor);
         break;
       default:
     }

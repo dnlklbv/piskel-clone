@@ -40,6 +40,7 @@ const Toolbar = (props) => {
           type="button"
           className={buttonClass}
           style={{ backgroundImage: `url(./img/icon-${tool}.png)` }}
+          title={tool}
           data-tool={tool}
           onClick={onToolSelect}
         />
@@ -57,18 +58,21 @@ const Toolbar = (props) => {
         <input
           className="color-selector__primary"
           type="color"
+          title="primary color"
           value={primaryColor}
           onChange={onPrimaryColorChange}
         />
         <input
           className="color-selector__secondary"
           type="color"
+          title="secondary color"
           value={secondaryColor}
           onChange={onSecondaryColorChange}
         />
         <button
           type="button"
           className="color-selector__swap"
+          title="swap colors"
           onClick={onSwapColors}
         />
       </div>

@@ -1,0 +1,77 @@
+.frame-list-wrapper {
+  width: 45%;
+  margin: 0 1vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  &__button {
+    width: 100%;
+    padding-bottom: 50%;
+
+    background: #444444;
+    background-image: url(img/icon-plus.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.frame-list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.frame-item {
+  position: relative;
+
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 1vh;
+  padding: 0;
+  padding-bottom: 100%;
+
+  background-color: #ffffff;
+  background-size: 100%;
+  border: 5px solid #444444;
+
+  image-rendering: pixelated;
+
+  &_selected {
+    border-color: #4d90fe;
+  }
+
+  &__number,
+  &__delete,
+  &__copy {
+    position: absolute;
+
+    width: 25%;
+    height: 25%;
+
+    font-size: 1.5em;
+    text-align: center;
+    color: #ffffff;
+
+    background: #333333;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+  }
+
+  &__delete {
+    right: 0;
+    bottom: 0;
+
+    background-image: url(img/icon-delete.png);
+  }
+
+  &__copy {
+    bottom: 0;
+    left: 0;
+
+    background-image: url(img/icon-copy.png);
+  }
+}

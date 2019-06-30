@@ -3,17 +3,7 @@ import PropTypes from 'prop-types';
 
 import CursorCoords from '../CursorCoords';
 
-import PenTool from '../../tools/PenTool';
-import MirrorPenTool from '../../tools/MirrorPenTool';
-import FillTool from '../../tools/FillTool';
-import EraserTool from '../../tools/EraserTool';
-import DitheringTool from '../../tools/DitheringTool';
-import FillSameTool from '../../tools/FillSameTool';
-import LightenTool from '../../tools/LightShadeTool';
-import DarkShadeTool from '../../tools/DarkShadeTool';
-import RectangleTool from '../../tools/RectangleTool';
-import LineTool from '../../tools/LineTool';
-import CircleTool from '../../tools/CircleTool';
+import toolMap from '../../tools/toolMap';
 
 class Canvas extends Component {
   constructor(props) {
@@ -54,43 +44,8 @@ class Canvas extends Component {
     const coords = this.getRelativeCoords(offsetX, offsetY);
     const { x, y } = coords;
 
-    switch (currentTool) {
-      case 'pen':
-        this.toolObject = new PenTool(ctx, primaryColor);
-        break;
-      case 'mirror-pen':
-        this.toolObject = new MirrorPenTool(ctx, primaryColor);
-        break;
-      case 'fill':
-        this.toolObject = new FillTool(ctx, primaryColor);
-        break;
-      case 'eraser':
-        this.toolObject = new EraserTool(ctx);
-        break;
-      case 'dithering':
-        this.toolObject = new DitheringTool(ctx, primaryColor, secondaryColor);
-        break;
-      case 'fill-same':
-        this.toolObject = new FillSameTool(ctx, primaryColor);
-        break;
-      case 'lighten':
-        this.toolObject = new LightenTool(ctx, primaryColor);
-        break;
-      case 'darken':
-        this.toolObject = new DarkShadeTool(ctx, primaryColor);
-        break;
-      case 'rectangle':
-        this.toolObject = new RectangleTool(ctx, primaryColor);
-        break;
-      case 'line':
-        this.toolObject = new LineTool(ctx, primaryColor);
-        break;
-      case 'circle':
-        this.toolObject = new CircleTool(ctx, primaryColor);
-        break;
-      default:
-    }
-
+    // get proper tool class from toolMap and create toolObject
+    this.toolObject = new toolMap[currentTool](ctx, primaryColor, secondaryColor);
     this.toolObject.startDraw(x, y);
   }
 
@@ -106,6 +61,7 @@ class Canvas extends Component {
 
     if (!this.isPainting) return;
 
+    // ignore if toolObject doesn't have a continueDraw method
     try {
       this.toolObject.continueDraw(x, y);
     } catch (error) {
@@ -123,12 +79,6 @@ class Canvas extends Component {
 
     if (!this.isPainting) return;
     this.isPainting = false;
-
-    try {
-      this.toolObject.stopDraw();
-    } catch (error) {
-      if (error.name !== 'TypeError') throw error;
-    }
   }
 
   render() {

@@ -1,0 +1,41 @@
+.preview-wrapper {
+  width: 100%;
+}
+
+.preview {
+  position: relative;
+
+  width: 100%;
+  padding-bottom: 100%;
+
+  background-color: #ffffff;
+  border: 5px solid #444444;
+
+  &__button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 10%;
+    height: 10%;
+    padding: 0;
+
+    background: #333333;
+    background-image: url(./img//icon-fullscreen.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.preview-control {
+  display: flex;
+  justify-content: space-between;
+
+  color: #ffffff;
+
+  &__range {
+    width: 60%;
+  }
+}

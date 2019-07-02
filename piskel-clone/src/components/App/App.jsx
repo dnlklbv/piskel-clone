@@ -3,6 +3,7 @@ import React from 'react';
 import Toolbar from '../Toolbar';
 import FrameList from '../FrameList';
 import Canvas from '../Canvas';
+import Preview from '../Preview';
 
 const App = () => (
   <div className="container">
@@ -13,7 +14,9 @@ const App = () => (
     <main className="container__main-section">
       <Canvas />
     </main>
-    <aside className="container__sidebar" />
+    <aside className="container__sidebar">
+      <Preview />
+    </aside>
   </div>
 );
 

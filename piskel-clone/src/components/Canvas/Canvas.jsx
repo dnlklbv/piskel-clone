@@ -27,6 +27,22 @@ class Canvas extends Component {
     this.pixelSize = this.canvas.offsetHeight / canvasSize;
   }
 
+  componentWillReceiveProps(newProps) {
+    const { currentFrameNumber, canvasSize, frameList } = this.props;
+    const { ctx } = this;
+    if (
+      newProps.currentFrameNumber !== currentFrameNumber
+      || newProps.frameList.length !== frameList.length
+    ) {
+      ctx.clearRect(0, 0, canvasSize, canvasSize);
+      const frame = newProps.frameList[newProps.currentFrameNumber];
+      if (!frame) return;
+      const img = new Image();
+      img.src = frame;
+      ctx.drawImage(img, 0, 0);
+    }
+  }
+
   getRelativeCoords(offsetX, offsetY) {
     const coords = {
       x: Math.floor(offsetX / this.pixelSize),
@@ -79,6 +95,11 @@ class Canvas extends Component {
 
     if (!this.isPainting) return;
     this.isPainting = false;
+
+    const { updateCurrentFrame } = this.props;
+    const { canvas } = this;
+
+    updateCurrentFrame(canvas.toDataURL());
   }
 
   render() {
@@ -106,6 +127,11 @@ class Canvas extends Component {
 
 Canvas.propTypes = {
   canvasSize: PropTypes.number.isRequired,
+
+  currentFrameNumber: PropTypes.number.isRequired,
+  frameList: PropTypes.arrayOf(PropTypes.string).isRequired,
+
+  updateCurrentFrame: PropTypes.func.isRequired,
 
   currentTool: PropTypes.string.isRequired,
   primaryColor: PropTypes.string.isRequired,

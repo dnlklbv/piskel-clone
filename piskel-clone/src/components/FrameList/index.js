@@ -1,4 +1,4 @@
-import FrameList from './FrameList';
+import FrameListContainer from './FrameListContainer';
 import './FrameList.scss';
 
-export default FrameList;
+export default FrameListContainer;

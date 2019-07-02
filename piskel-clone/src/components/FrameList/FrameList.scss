@@ -34,13 +34,27 @@
   padding-bottom: 100%;
 
   background-color: #ffffff;
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: 100%;
   border: 5px solid #444444;
+
+  transition: border 0.3s;
 
   image-rendering: pixelated;
 
   &_selected {
     border-color: #4d90fe;
+  }
+
+  &__select-button {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background: none;
+    border: none;
   }
 
   &__number,
@@ -58,6 +72,7 @@
     background: #333333;
     background-repeat: no-repeat;
     background-position: center;
+    border: none;
     cursor: pointer;
   }
 

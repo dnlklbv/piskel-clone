@@ -11,6 +11,17 @@ class Preview extends React.Component {
     this.updateFPS = this.updateFPS.bind(this);
   }
 
+  componentDidUpdate() {
+    const { fps, frameList } = this.props;
+    let i = 0;
+    clearInterval(this.intervalId);
+    this.intervalId = setInterval(() => {
+      i += 1;
+      if (i === frameList.length) i = 0;
+      this.preview.style.backgroundImage = `url(${frameList[i]})`;
+    }, Math.round(1000 / fps));
+  }
+
   toggleFullScreen() {
     if (!this.isFullcreen) {
       this.preview.requestFullscreen();
@@ -44,6 +55,8 @@ class Preview extends React.Component {
 
 Preview.propTypes = {
   fps: PropTypes.number.isRequired,
+
+  frameList: PropTypes.arrayOf(PropTypes.string).isRequired,
 
   updateFPS: PropTypes.func.isRequired,
 };

@@ -10,6 +10,10 @@
 
   background-color: #ffffff;
   border: 5px solid #444444;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center center;
+  image-rendering: pixelated;
 
   &__button {
     position: absolute;

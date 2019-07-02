@@ -8,10 +8,11 @@ import { updateFPS } from '../../store/frames/actions';
 import Preview from './Preview';
 
 const PreviewContainer = (props) => {
-  const { fps, updateFPSConnect } = props;
+  const { fps, frameList, updateFPSConnect } = props;
   return (
     <Preview
       fps={fps}
+      frameList={frameList}
       updateFPS={updateFPSConnect}
     />
   );
@@ -20,11 +21,14 @@ const PreviewContainer = (props) => {
 PreviewContainer.propTypes = {
   fps: PropTypes.number.isRequired,
 
+  frameList: PropTypes.arrayOf(PropTypes.string).isRequired,
+
   updateFPSConnect: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   fps: state.frames.fps,
+  frameList: state.frames.frameList,
 });
 
 const mapDispatchToProps = {

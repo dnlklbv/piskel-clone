@@ -4,6 +4,7 @@ import Toolbar from '../Toolbar';
 import FrameList from '../FrameList';
 import Canvas from '../Canvas';
 import Preview from '../Preview';
+import DownloadButton from '../DownloadButton';
 
 const App = () => (
   <div className="container">
@@ -16,6 +17,7 @@ const App = () => (
     </main>
     <aside className="container__sidebar">
       <Preview />
+      <DownloadButton />
     </aside>
   </div>
 );

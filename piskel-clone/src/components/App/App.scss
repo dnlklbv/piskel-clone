@@ -13,6 +13,9 @@
     display: flex;
     justify-content: space-between;
     width: 22vw;
+    &:nth-child(3) {
+      display: block;
+    }
   }
 
   &__main-section {

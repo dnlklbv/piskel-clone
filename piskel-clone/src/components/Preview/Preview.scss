@@ -1,18 +1,23 @@
 .preview-wrapper {
-  width: 100%;
-}
-
-.preview {
   position: relative;
 
   width: 100%;
   padding-bottom: 100%;
+}
+
+.preview {
+  position: absolute;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 
   background-color: #ffffff;
-  border: 5px solid #444444;
   background-repeat: no-repeat;
-  background-size: contain;
   background-position: center center;
+  background-size: contain;
+  border: 5px solid #444444;
+
   image-rendering: pixelated;
 
   &__button {

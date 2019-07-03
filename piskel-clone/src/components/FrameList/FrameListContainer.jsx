@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import {
-  addFrame, deleteFrame, duplicateFrame, selectFrame,
+  addFrame, deleteFrame, duplicateFrame, selectFrame, swapFrames,
 } from '../../store/frames/actions';
 
 import FrameList from './FrameList';
 
 const FrameListContainer = (props) => {
   const {
-    frameList, currentFrameNumber,
-    addFrameConnect, selectFrameConnect, deleteFrameConnect, duplicateFrameConnect,
+    frameList, currentFrameNumber, addFrameConnect, selectFrameConnect,
+    deleteFrameConnect, duplicateFrameConnect, swapFramesConnect,
   } = props;
   return (
     <FrameList
@@ -23,6 +23,7 @@ const FrameListContainer = (props) => {
       deleteFrame={deleteFrameConnect}
       selectFrame={selectFrameConnect}
       duplicateFrame={duplicateFrameConnect}
+      swapFrames={swapFramesConnect}
     />
   );
 };
@@ -35,6 +36,7 @@ FrameListContainer.propTypes = {
   selectFrameConnect: PropTypes.func.isRequired,
   deleteFrameConnect: PropTypes.func.isRequired,
   duplicateFrameConnect: PropTypes.func.isRequired,
+  swapFramesConnect: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -47,6 +49,7 @@ const mapDispatchToProps = {
   selectFrameConnect: selectFrame,
   deleteFrameConnect: deleteFrame,
   duplicateFrameConnect: duplicateFrame,
+  swapFramesConnect: swapFrames,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FrameListContainer);

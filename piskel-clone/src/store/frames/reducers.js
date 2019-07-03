@@ -1,5 +1,6 @@
 import {
-  UPDATE_CURRENT_FRAME, UPDATE_FPS, SELECT_FRAME, ADD_FRAME, DELETE_FRAME, DUPLICATE_FRAME,
+  UPDATE_CURRENT_FRAME, UPDATE_FPS, SELECT_FRAME, ADD_FRAME,
+  DELETE_FRAME, DUPLICATE_FRAME, SWAP_FRAMES,
 } from './actions';
 
 const defaultState = {
@@ -21,7 +22,7 @@ const reducer = (state = defaultState, action) => {
     case DELETE_FRAME:
       if (frameList.length < 2) return state;
       frameList.splice(action.payload, 1);
-      if (currentFrameNumber >= action.payload) currentFrameNumber -= 1;
+      if (currentFrameNumber >= action.payload && currentFrameNumber > 0) currentFrameNumber -= 1;
       return {
         ...state,
         frameList,
@@ -30,6 +31,21 @@ const reducer = (state = defaultState, action) => {
     case DUPLICATE_FRAME:
       frameList.splice(action.payload, 0, frameList[action.payload]);
       return { ...state, frameList, currentFrameNumber: action.payload + 1 };
+    case SWAP_FRAMES:
+      // swap elements of frameList array
+      [
+        frameList[action.payload.firstFrameNumber], frameList[action.payload.secondFrameNumber],
+      ] = [
+        frameList[action.payload.secondFrameNumber], frameList[action.payload.firstFrameNumber],
+      ];
+      return {
+        ...state,
+        frameList,
+        // if second swapping frame is selected,
+        // change selected to first swapping frame to avoid frame replacement
+        currentFrameNumber: action.payload.secondFrameNumber === state.currentFrameNumber
+          ? action.payload.firstFrameNumber : action.payload.secondFrameNumber,
+      };
     case UPDATE_FPS:
       return { ...state, fps: action.payload };
     case SELECT_FRAME:
